@@ -1,17 +1,18 @@
 # SBFI - Salah's BrainF**k Interpreter
 
-**SBFI** is a simple, lightweight, and not that fast, but fast interpreter for the Brainf**k programming language written in pure Python. It supports standard Brainf**k instructions, customizable I/O, and can be used both as a CLI tool and as a Python library.
+**SBFI** is a simple, lightweight, and not that fast, but fast interpreter for the Brainf..k programming language written in pure Python. It supports standard Brainf
+..k instructions, customizable I/O, and can be used both as a CLI tool and as a Python library.
 
 ---
-***This page may contain errors or incorrect information. Please report any errors you may find.***
+***This page and the `.whl`/`source-code` may contain errors or incorrect information. Please report any errors you may find.***
 ---
 ## Installation
 
 You can clone the repository:
 
 ```bash
-git clone https://github.com/SBFI-Project/SBFI-Project.git
-cd SBFI-main
+git clone https://github.com/Salah2PLS/SalahBFI.git
+cd SalahBFI
 
 # for building
 pip install build
