@@ -1,0 +1,75 @@
+#!python
+import argparse    # CLI
+from sbfi import * # BrainfInterpreter, run_code, exec_file
+from sys import version
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="SBFI - Salah's BrainF**k Interpreter",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+
+    parser.add_argument(
+        "-dbg", "--debug",
+        action="store_true",
+        help="Enable Debug mode."
+    )
+    parser.add_argument(
+        "-r", "--run",
+        help="Brainf**k file to execute."
+    )
+    parser.add_argument(
+        "-dmps", "--dump-status",
+        action="store_true",
+        help="Dump the Interpreter Status (after execution)."
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="store_true",
+        help="Print version & credits."
+    )
+    parser.add_argument(
+        "-cmd", "--command-line-interface",
+        action="store_true",
+        help="run the Brainf**k CLI/REPL."
+    )
+
+    cmd = parser.parse_args()
+
+    # if cmd.command_line_interface, run as REPL Mode.
+    if cmd.command_line_interface:
+        BFREPLModeDoNotUseThisAsLibrary()
+    
+    # Version mode
+    if cmd.version:
+        print(f"SBFI v{VERSION}-{STATUS}\n- Salah Rami Al-Refaai\n- Powered by Python{version.split()[0]}")
+        return
+
+    # Check for execution
+    if cmd.run is None:
+        print("\033[1m\033[93mHint:\033[0m Use -r <file.bf> to execute a file. Use -h for help.")
+        return
+
+    bfi = BrainfInterpreter()
+
+    if cmd.debug:
+        if not cmd.run:
+            print("\033[1m\033[91mError:\033[0m Can't enable debug mode: no file to execute.")
+            return
+        bfi.enable_debug(True)
+
+    if cmd.run:
+        try:
+            with open(cmd.run, "r") as f:
+                code = f.read()
+            bfi.execute(code)  # execute the code
+            if cmd.dump_status:
+                bfi.get_dump()
+        except Exception as e:
+            print(f"\033[1m\033[91mError:\033[0m {e}")
+            return
+
+
+if __name__ == "__main__":
+    main()
+
